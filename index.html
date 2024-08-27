@@ -191,15 +191,11 @@
         const subject = "Job Offer for Azlan Tomindug"
         const body = `Dear Azlan, 
         
-        We are happy to inform you that the job position "CEO" of our company META is open exclusively for you only, we are fortunate enough to kick out Mark Zuckerberg in order for you to manage our company.
-
-        Best Regards,
-        Vice President Bill Gates
-        META` ;
+       We are happy to inform you that we want you on board!`
         
-        const mailtolink = `https://mail.google.com/mail/?iew=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-        const confirmed = confirm(`You are sure to send this job offer to ${email}.`);
+        const confirmed = confirm(`Are you sure you want to send a job offer to  ${email}.`);
 
         if (confirmed) {
           window.open(mailtolink, '_blank');
