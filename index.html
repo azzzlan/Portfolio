@@ -1,25 +1,211 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark page-navbar gradient">
-  <div class="container">
-    <a class="navbar-brand logo" href="#">My CV</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item item">
-          <a class="nav-link" href="#work-experience">Work Experience</a>
-        </li>
-        <li class="nav-item item">
-          <a class="nav-link" href="#education">Education</a>
-        </li>
-        <li class="nav-item item">
-          <a class="nav-link" href="#skills">Skills</a>
-        </li>
-        <li class="nav-item item">
-          <a class="nav-link" href="#hobbies">Hobbies</a>
-        </li>
-      </ul>
-    </div>
-    <button class="btn btn-outline-primary ml-auto" onclick="window.location.href='datatables.html'">Data Tables Demo</button>
-  </div>
-</nav>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beautiful CV Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  </head>
+  <body>
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark page-navbar gradient">
+      <div class="container">
+        <a class="navbar-brand logo" href="#">My CV</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item item">
+                <li class="nav-item item">
+                  <a class="nav-link" href="#work-experience">Work Experience</a>
+                </li>
+                <li class="nav-item item">
+                    <a class="nav-link" href="#education">Education</a>
+                </li>
+                <li class="nav-item item">
+                  <a class="nav-link" href="#skills">Skills</a>
+                </li>
+                <li class="nav-item item">
+                    <a class="nav-link" href="#hobbies">Hobbies</a>
+                </li>
+              </li>
+            </ul>
+          </div>
+        
+      </div>
+    </nav>
+    <main class="page cv-page">
+      <section class="cv-block block-intro border-bottom">
+        <div class="container">
+          <div class="avatar">
+            <img class="img-fluid rounded-circle" src="assets/img/avatar.jpg">
+          </div>
+          <p>Hello! I am <strong>Azlan Tomindug</strong>. I am a 4th year student of Mindanao State University taking up Bachelor of Science in Information Technology..</p>
+          <a href="#" onclick="openGmail()" class="btn btn-outline-primary">Hire Me</a>
+
+      
+        </div>
+      </section>
+      <section class="cv-block info">
+        <div class="container">
+          <div class="work-experience group" id="work-experience">
+            <h2 class="text-center">Work Experience</h2>
+            <div class="item">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Social Media Specialist</h3>
+                  <h4 class="organization">Websites for Anything.</h4>
+                </div>
+                <div class="col-md-6">
+                  <time class="period">May 2024 - Present</time>
+                </div>
+              </div>
+              <p class="text-muted">I handle and manage social media postings of our clients who availed our outreach service. I also send Newsletters for our clients listed audiences.</p>
+            </div>
+            <div class="item">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Data Entry</h3>
+                  <h4 class="organization">Websites for Anything.</h4>
+                </div>
+                <div class="col-md-6">
+                  <time class="period">July 2023 - April 2024</time>
+                </div>
+              </div>
+              <p class="text-muted">I scrape data from the internet to find possible clients, we contact them by scraping their information online and sending them emails talking about the services we offered.</p>
+            </div>
+          
+          </div>
+          <div class="education group" id="education">
+            <h2 class="text-center">Education</h2>
+            <div class="item">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>High School</h3>
+                  <h4 class="organization">Mindanao State University College of Educaction and Training Department General Santos City</h4>
+                </div>
+                <div class="col-md-6">
+                  <time class="period">June 2015 -  April 2019</time>
+                </div>
+              </div>
+              <p class="text-muted">Finished my High School education in MSU CETD.</p>
+            </div>
+            <div class="item">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Senior High School</h3>
+                  <h4 class="organization">Mindanao State University General Santos City</h4>
+                </div>
+                <div class="col-md-6">
+                  <time class="period">August 2019 - June 2021</time>
+                </div>
+              </div>
+              <p class="text-muted">I graduated Senior High School in Mindanao State University General Santos City, I spent half of my Senior High Year Face-to-face and the other half online.</p>
+            </div>
+          </div>
+          <div class="group" id="skills">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="skills info-card">
+                  <h2>Skills</h2>
+                  <h3>Data Entry</h3>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                    aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                    </div>
+                  </div>
+                  <h3>Social Media</h3>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                    aria-valuemin="0" aria-valuemax="100" style="width:90%">
+                    </div>
+                  </div>
+                  <h3>Newsletter Writing</h3>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                    aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="contact-info info-card">
+                  <h2>Contact Info</h2>
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="ion-android-calendar icon"></i>
+                    </div>
+                    <div class="col-9">
+                      <span>August 12. 2002</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                        <i class="ion-person icon"></i>
+                    </div>
+                    <div class="col-9">
+                      <span>Azlan Tomindug</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="ion-ios-telephone icon"></i>
+                    </div>
+                    <div class="col-9">
+                      <span>+63 9505 910 870</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="ion-at icon"></i>
+                    </div>
+                    <div class="col-9">
+                      <span>azlantomindug12@email.com</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hobbies group" id="hobbies">
+            <h2 class="text-center">Hobbies</h2>
+            <p class="text-center text-muted">I play basketball and video games most of my free time, but I collect perfume as a hobby.</p>
+          </div>
+        </div>
+      </section>
+      <footer class="page-footer">
+        <div class="container">
+          <div class="social-icons">
+            <a href="https://facebook.com/NotAzlanTomindug"><i class="ion-social-facebook" title="Facebook"></i></a>
+            <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fazlan.tomindug%3Figsh%3DMW00YTAwZmJpYzlkcg%253D%253D%26fbclid%3DIwZXh0bgNhZW0CMTAAAR2hUbNsArWksAWPhQJL91RKQa4G0mfCAS_KDhfU5VeSgJGTaTCINoZmY2w_aem_-_ox41iBQc4BK6MQU5CwZQ&h=AT2fJ-1oobXCAz44NmI-fnwCbdLZrLp1QwnZ4Blg9dzPL8iDGf0GKBlizzSZLBmDoRmYN1s8uPSXQ_9GcyDfCzIv7GUjvr-j7bYDLz5MshfqQR2g9LxiAYNBBbCp36I1ty_bww"><i class="ion-social-instagram-outline" title="Instagram"></i></a>
+            <a href="https://x.com/zlntmndg"><i class="ion-social-twitter" title="Twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script>
+      function openGmail() {
+        const email = "azlantomindug12@gmail.com"
+        const subject = "Job Offer for Azlan Tomindug"
+        const body = Dear Azlan, 
+        
+             We are happy to inform you that we want you on board!
+             ;
+        
+        const mailtoLink = https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)};
+
+        const confirmed = confirm(Are you sure you want to send a job offer to  ${email}.);
+
+        if (confirmed) {
+          window.open(mailtoLink, '_blank');
+        }
+
+      }
+  </script>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</html>
