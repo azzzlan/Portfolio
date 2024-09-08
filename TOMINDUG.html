@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f7;
+        }
+
+        .data-table-wrapper {
+            margin: 20px;
+            background-color: #1f3a63;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        .table thead {
+            background-color: #4a6fa1;
+        }
+
+        .table th, .table td {
+            color: white;
+            vertical-align: middle;
+        }
+
+        .table tbody tr {
+            background-color: #2b4d7a;
+        }
+
+        .table tbody tr.selected {
+            background-color: #4caf50 !important; /* Shade of green for selected rows */
+        }
+
+        .table tbody tr:hover {
+            background-color: #345e91;
+        }
+
+        .table-actions {
+            text-align: center;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .pagination-top {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .entries-info {
+            margin-top: 10px;
+        }
+
+        .show-entries {
+            margin-top: 10px;
+        }
+
+        .entries-select {
+            margin-right: 10px;
+        }
+
+        .pagination-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .column-toggle {
+            margin-bottom: 10px;
+        }
+
+        .tab-content {
+            padding: 0;
+        }
+
+        .btn-delete {
+            background-color: red;
+            color: white;
+        }
+
+        .btn-select {
+            background-color: green;
+            color: white;
+        }
+
+        .btn-hide {
+            background-color: gray;
+            color: white;
+        }
+
+        .hidden-rows {
+            display: none;
+            background-color: #e0e0e0;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .hidden-rows ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .hidden-rows li {
+            padding: 5px 0;
+        }
+
+        .search-input {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid data-table-wrapper">
+        <h3>Data List</h3>
+
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="table1-tab" data-bs-toggle="tab" href="#table1" role="tab" aria-controls="table1" aria-selected="true">Table 1</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="table2-tab" data-bs-toggle="tab" href="#table2" role="tab" aria-controls="table2" aria-selected="false">Table 2</a>
+            </li>
+        </ul>
+
+        <!-- Pagination Top (Page Navigation in Top Middle Area) -->
+        <div class="pagination-top">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination1"></ul>
+            </nav>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Table 1 -->
+            <div class="tab-pane fade show active" id="table1" role="tabpanel" aria-labelledby="table1-tab">
+                <!-- Toggle Columns -->
+                <div class="column-toggle">
+                    <label><input type="checkbox" class="toggle-column" data-column="0" checked> #</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="1" checked> Name</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="2" checked> Position</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="3" checked> Office</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="4" checked> Extn.</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="5" checked> Start date</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="6" checked> Salary</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="7" checked> Nationality</label>
+                </div>
+
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-striped" id="employee-table1">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                                <th>Nationality</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body1">
+                            <!-- Data will be loaded here by AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination and Entries per page (lower left) -->
+                <div class="pagination-bottom">
+                    <div class="show-entries">
+                        <label>Show 
+                            <select class="form-select form-select-sm entries-select" aria-label="Entries per page" id="entries-select1">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            entries
+                        </label>
+                        <span class="entries-info" id="entries-info1">Showing 1 to 10 of 10 entries</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table 2 -->
+            <div class="tab-pane fade" id="table2" role="tabpanel" aria-labelledby="table2-tab">
+                <!-- Toggle Columns -->
+                <div class="column-toggle">
+                    <label><input type="checkbox" class="toggle-column" data-column="0" checked> #</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="1" checked> Name</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="2" checked> Position</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="3" checked> Office</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="4" checked> Extn.</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="5" checked> Start date</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="6" checked> Salary</label>
+                    <label><input type="checkbox" class="toggle-column" data-column="7" checked> Nationality</label>
+                </div>
+
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-striped" id="employee-table2">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                                <th>Nationality</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body2">
+                            <!-- Data will be loaded here by AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination and Entries per page (lower left) -->
+                <div class="pagination-bottom">
+                    <div class="show-entries">
+                        <label>Show 
+                            <select class="form-select form-select-sm entries-select" aria-label="Entries per page" id="entries-select2">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            entries
+                        </label>
+                        <span class="entries-info" id="entries-info2">Showing 1 to 10 of 10 entries</span>
+                    </div>
+
+                    <div class="pagination-top">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="pagination2"></ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = [];
+        let currentPage1 = 1;
+        let rowsPerPage1 = 10;
+
+        let currentPage2 = 1;
+        let rowsPerPage2 = 10;
+
+        // AJAX to load data from arrays.txt
+        document.addEventListener("DOMContentLoaded", function() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "arrays.txt", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    data = JSON.parse(xhr.responseText);
+                    loadTableData("table-body1", "entries-info1", rowsPerPage1, currentPage1);
+                    loadTableData("table-body2", "entries-info2", rowsPerPage2, currentPage2);
+                    createPagination("pagination1", data.length, rowsPerPage1, currentPage1, changePage1);
+                    createPagination("pagination2", data.length, rowsPerPage2, currentPage2, changePage2);
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    console.error("Failed to load data: " + xhr.status);
+                }
+            };
+            xhr.send();
+
+            // Add event listener for the number of entries per page for Table 1
+            document.getElementById('entries-select1').addEventListener('change', function() {
+                rowsPerPage1 = parseInt(this.value);
+                currentPage1 = 1;
+                loadTableData("table-body1", "entries-info1", rowsPerPage1, currentPage1);
+                createPagination("pagination1", data.length, rowsPerPage1, currentPage1, changePage1);
+            });
+
+            // Add event listener for the number of entries per page for Table 2
+            document.getElementById('entries-select2').addEventListener('change', function() {
+                rowsPerPage2 = parseInt(this.value);
+                currentPage2 = 1;
+                loadTableData("table-body2", "entries-info2", rowsPerPage2, currentPage2);
+                createPagination("pagination2", data.length, rowsPerPage2, currentPage2, changePage2);
+            });
+
+            // Add event listeners for column toggles
+            document.querySelectorAll('.toggle-column').forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    toggleColumn(this);
+                });
+            });
+        });
+
+        // Function to load table data into the specified table body
+        function loadTableData(tableBodyId, entriesInfoId, rowsPerPage, currentPage) {
+            const tableBody = document.getElementById(tableBodyId);
+            const entriesInfo = document.getElementById(entriesInfoId);
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const pageData = data.slice(startIndex, endIndex);
+            let tableRows = "";
+
+            pageData.forEach(employee => {
+                tableRows += `
+                    <tr>
+                        <td>${employee.id}</td>
+                        <td>${employee.name}</td>
+                        <td>${employee.position}</td>
+                        <td>${employee.office}</td>
+                        <td>${employee.extn}</td>
+                        <td>${employee.start_date}</td>
+                        <td>${employee.salary}</td>
+                        <td>${employee.nationality}</td>
+                        <td class="table-actions">
+                            <button class="btn btn-select btn-sm" onclick="selectRow(this)">Select</button>
+                            <button class="btn btn-delete btn-sm" onclick="deleteRow(this)">Delete</button>
+                            <button class="btn btn-hide btn-sm" onclick="hideRow(this)">Hide</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableBody.innerHTML = tableRows;
+            entriesInfo.innerHTML = `Showing ${startIndex + 1} to ${Math.min(endIndex, data.length)} of ${data.length} entries`;
+        }
+
+        // Function to create pagination
+        function createPagination(paginationId, totalItems, rowsPerPage, currentPage, changePageCallback) {
+            const paginationElement = document.getElementById(paginationId);
+            const totalPages = Math.ceil(totalItems / rowsPerPage);
+
+            let paginationHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="javascript:void(0)" onclick="${changePageCallback.name}(${i})">${i}</a></li>`;
+            }
+
+            paginationElement.innerHTML = paginationHTML;
+        }
+
+        // Function to change page for table 1
+        function changePage1(pageNumber) {
+            currentPage1 = pageNumber;
+            loadTableData("table-body1", "entries-info1", rowsPerPage1, currentPage1);
+            createPagination("pagination1", data.length, rowsPerPage1, currentPage1, changePage1);
+        }
+
+        // Function to change page for table 2
+        function changePage2(pageNumber) {
+            currentPage2 = pageNumber;
+            loadTableData("table-body2", "entries-info2", rowsPerPage2, currentPage2);
+            createPagination("pagination2", data.length, rowsPerPage2, currentPage2, changePage2);
+        }
+
+        // Toggle column visibility
+        function toggleColumn(checkbox) {
+            const columnIndex = checkbox.getAttribute('data-column');
+            const tables = document.querySelectorAll('table');
+            tables.forEach(table => {
+                const th = table.querySelector(`thead th:nth-child(${parseInt(columnIndex) + 1})`);
+                const tds = table.querySelectorAll(`tbody td:nth-child(${parseInt(columnIndex) + 1})`);
+
+                if (checkbox.checked) {
+                    th.style.display = '';
+                    tds.forEach(td => td.style.display = '');
+                } else {
+                    th.style.display = 'none';
+                    tds.forEach(td => td.style.display = 'none');
+                }
+            });
+        }
+
+        function selectRow(button) {
+            const row = button.closest('tr');
+            row.classList.toggle('selected');
+        }
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
+        function hideRow(button) {
+            const row = button.closest('tr');
+            row.style.display = 'none';
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
